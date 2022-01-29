@@ -6,7 +6,36 @@ class Vampire {
     this.creator = null;
   }
 
-  /** Simple tree methods **/
+  // Returns the vampire object with that name, or null if no vampire exists with that name
+  vampireWithName(name) {
+    if (this.name === name) {
+      return this;
+    } 
+    for (const off of this.offspring) {
+      let temp = off.vampireWithName(name);
+      if (temp) {
+        return temp;
+      }
+    }
+    
+    return null;
+  }
+
+  // Returns the total number of vampires that exist
+  get totalDescendents() {
+    let count = 0; // 1
+
+    for (const off of this.offspring) {
+      count += 1 + off.totalDescendents;
+    }
+
+    return count;
+  }
+
+  // Returns an array of all the vampires that were converted after 1980
+  get allMillennialVampires() {
+
+  }
 
   // Adds the vampire as an offspring of this vampire
   addOffspring(vampire) {
@@ -43,7 +72,7 @@ class Vampire {
   }
 
   // Returns the total number of vampires that exist
-  get totalDescendents() {
+  get count() {
     
   }
 
